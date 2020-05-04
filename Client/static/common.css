@@ -1,0 +1,65 @@
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.content > * {
+  margin-top: 0.8em;
+}
+.content .input-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 0.4em;
+  font-family: tahoma, arial, "Hiragino Sans GB", simsun, sans-serif;
+}
+.content .input-label .input-title {
+  width: 9em;
+  background: rgba(255, 255, 255, 0.5);
+  line-height: 1.5;
+  height: 1.5em;
+  padding: 0.3em 0.5em;
+  border-radius: 0.4em 0 0 0.4em;
+  border: grey solid 1px;
+  border-right: none;
+}
+.content .input-label .input-box {
+  color: #6983aa;
+  height: 1.5em;
+  padding: 0.3em 0.5em;
+  border-radius: 0 0.4em 0.4em 0;
+  border: grey solid 1px;
+  transition: all 0.3s ease;
+}
+.content .input-label .input-box:focus {
+  border-color: #6983aa;
+  box-shadow: #6983aa 0 0 5px;
+}
+.content .input-label .error {
+  border-color: #ca3030;
+  box-shadow: #ca3030 0 0 5px;
+}
+.content .input-label .error-message {
+  position: absolute;
+  user-select: none;
+  color: red;
+  right: 0;
+}
+.content .commit {
+  cursor: pointer;
+  color: #363636;
+  background: rgba(255, 255, 255, 0.5);
+  width: 4em;
+  padding: 0.3em 0.5em;
+  border-radius: 0.4em;
+  border: grey solid 1px;
+  transition: all 0.2s ease;
+}
+.content .commit:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.content .commit:active {
+  background-color: #ccc;
+}

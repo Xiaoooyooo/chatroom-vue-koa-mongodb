@@ -9,6 +9,7 @@
         ref="n"
         class="msg-box"
         @before-enter="beforeEnter"
+        @after-enter="afterEnter"
         appear
       >
         <li class="msg-item" v-for="(msg,index) in messages" :key="msg.key" :data-index="index">
@@ -57,6 +58,9 @@ export default {
       if (el.dataset.index < this.init_num) {
         el.style.transitionDelay = `${0.1 * el.dataset.index}s`;
       }
+    },
+    afterEnter(el) {
+      el.style.transitionDelay = "0s";
     }
   },
   filters: {
@@ -119,29 +123,19 @@ export default {
   // justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  padding: 1em 0;
   .title {
     color: white;
-    margin-bottom: 0.5em;
-    font-size: 1.5em;
   }
   .messages {
     flex: 1;
-    width: 31.8em;
-
     box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 0.5em;
-    padding: 0.5em;
     overflow: overlay;
-    margin-bottom: 1em;
     .msg-box {
-          overflow: hidden;
+      overflow: hidden;
       text-align: left;
-      font-size: 1.3em;
       .msg-item {
-        padding-bottom: 0.3846em;
-        word-break: break-all;
+        word-break: break-word;
         & > span {
           font-weight: bold;
         }
@@ -158,37 +152,102 @@ export default {
   .message {
     font-family: tahoma, arial, "Hiragino Sans GB", simsun, sans-serif;
     display: flex;
-    %fonts {
-      height: 1.5em;
-      line-height: 1.5em;
-      padding: 0.5em 0.3em;
-      border: #313251 solid 1px;
-    }
     .message-title {
-      @extend %fonts;
-      width: 5em;
-      border-radius: 0.5em 0 0 0.5em;
-      border-right: none;
       background-color: rgba(255, 255, 255, 0.8);
-    }
-    #msg {
-      @extend %fonts;
-      width: 20em;
-      transition: all 0.3s ease;
-      z-index: 2;
-      &:focus {
-        border-color: #313251;
-        box-shadow: #313251 0 0 10px;
-      }
+      border-radius: 0.5em 0 0 0.5em;
+      border-right: none !important;
     }
     .send {
-      @extend %fonts;
-      width: 5em;
-      border-left: none;
+      border-left: none !important;
       box-sizing: content-box;
-      border-radius: 0 0.5em 0.5em 0;
       background-color: rgba(255, 255, 255, 0.8);
-      cursor: pointer;
+      border-radius: 0 0.5em 0.5em 0;
+    }
+  }
+}
+@media screen and (max-width: 500px) {
+  #main {
+    .title {
+      padding: 0.3em;
+      font-size: 1.3em;
+    }
+    .messages {
+      width: 100%;
+      padding: 0.5em 1em;
+      border-radius: 0.5em;
+      margin-bottom: 0.5em;
+      .msg-box {
+        .msg-item {
+          font-size: 1.5em;
+          padding-bottom: 0.3em;
+        }
+      }
+    }
+    .message {
+      width: 100%;
+      height: 2em;
+      line-height: 2em;
+      margin-bottom: 0.5em;
+      font-size: 1.2em;
+      .message-title {
+        flex: 1;
+      }
+      #msg {
+        flex: 3;
+        padding: 0 0.5em;
+      }
+      .send {
+        flex: 1;
+      }
+    }
+  }
+}
+@media screen and (min-width: 500px) {
+  #main {
+    padding: 1em 0;
+    .title {
+      margin-bottom: 0.5em;
+      font-size: 1.5em;
+    }
+    .messages {
+      width: 31.8em;
+      border-radius: 0.5em;
+      padding: 0.5em;
+      margin-bottom: 1em;
+      .msg-box {
+        font-size: 1.3em;
+        padding: 0 1em;
+        .msg-item {
+          padding-bottom: 0.3846em;
+        }
+      }
+    }
+    .message {
+      %fonts {
+        height: 1.5em;
+        line-height: 1.5em;
+        padding: 0.5em 0.3em;
+        border: #313251 solid 1px;
+      }
+      .message-title {
+        @extend %fonts;
+        width: 5em;
+      }
+      #msg {
+        @extend %fonts;
+        width: 20em;
+        transition: border-color, box-shadow 0.3s ease;
+        z-index: 2;
+        &:focus {
+          border-color: #313251;
+          box-shadow: #313251 0 0 10px;
+        }
+      }
+      .send {
+        @extend %fonts;
+        width: 5em;
+        cursor: pointer;
+      }
     }
   }
 }
